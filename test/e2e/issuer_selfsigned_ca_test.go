@@ -326,7 +326,9 @@ var _ = Describe("Self-signed Issuer", Label("Platform:Generic"), Ordered, func(
 
 			By("deploying hello-openshift application")
 			appName := "hello-openshift"
-			loader.CreateFromFile(testassets.ReadFile, filepath.Join("testdata", "acme", "deployment.yaml"), ns.Name)
+			loader.CreateFromFile(AssetFunc(testassets.ReadFile).WithTemplateValues(
+				AcmeHelloOpenShiftDeploymentConfig{Image: e2eHelloOpenShiftImageForNS(ns.Name)},
+			), filepath.Join("testdata", "acme", "deployment.yaml"), ns.Name)
 			loader.CreateFromFile(testassets.ReadFile, filepath.Join("testdata", "acme", "service.yaml"), ns.Name)
 
 			By("waiting for hello-openshift deployment to be ready")

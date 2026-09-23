@@ -21,6 +21,22 @@ type CertificateConfig struct {
 	DNSName string
 }
 
+// AcmeHelloOpenShiftDeploymentConfig customizes hello-openshift test workload deployment.
+type AcmeHelloOpenShiftDeploymentConfig struct {
+	Image string
+}
+
+// VaultHelmValuesConfig customizes Vault Helm chart values.
+type VaultHelmValuesConfig struct {
+	Repository string
+	Tag        string
+}
+
+// ServiceMeshWorkloadConfig customizes Service Mesh test workloads (httpbin, sleep).
+type ServiceMeshWorkloadConfig struct {
+	Image string
+}
+
 // IstioCSRGRPCurlJobConfig customizes the fields in a job spec
 type IstioCSRGRPCurlJobConfig struct {
 	CertificateSigningRequest string
@@ -29,6 +45,7 @@ type IstioCSRGRPCurlJobConfig struct {
 	JobName                   string
 	ProtoConfigMapName        string
 	ServiceAccountName        string
+	Image                     string
 }
 
 // ServiceMonitorConfig customizes fields in the ServiceMonitor spec

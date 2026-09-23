@@ -9,8 +9,8 @@ injector:
   enabled: false
 server:
   image:
-    repository: "docker.io/hashicorp/vault"
-    tag: "1.17.2"
+    repository: "{{if .Repository}}{{.Repository}}{{else}}docker.io/hashicorp/vault{{end}}"
+    tag: "{{if .Tag}}{{.Tag}}{{else}}1.17.2{{end}}"
   dataStorage:
     enabled: true
     size: 1Gi
@@ -28,6 +28,7 @@ server:
   standalone:
     enabled: true
     config: |
+      disable_mlock = true
       listener "tcp" {
         address = "[::]:8200"
         cluster_address = "[::]:8201"

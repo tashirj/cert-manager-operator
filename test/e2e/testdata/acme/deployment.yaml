@@ -18,7 +18,7 @@ spec:
         deployment: hello-openshift
     spec:
       containers:
-        - image: openshift/hello-openshift:latest
+        - image: {{if .Image}}{{.Image}}{{else}}openshift/hello-openshift:latest{{end}}
           imagePullPolicy: IfNotPresent
           name: hello-openshift
           ports:

@@ -21,7 +21,7 @@ spec:
       serviceAccountName: httpbin
       containers:
       - name: httpbin
-        image: docker.io/kennethreitz/httpbin
+        image: {{if .Image}}{{.Image}}{{else}}docker.io/kennethreitz/httpbin{{end}}
         command:
         - gunicorn
         args:

@@ -726,6 +726,7 @@ var _ = Describe("Istio-CSR operand coverage [apigroup:operator.openshift.io]", 
 					JobName:                   grpcAppName,
 					ProtoConfigMapName:        protoCM.Name,
 					ServiceAccountName:        meshWorkloadSA,
+					Image:                     e2eGrpcurlImageForNS(meshMemberNS.Name),
 				},
 			), filepath.Join("testdata", "istio", "grpcurl_job.yaml"), meshMemberNS.Name)
 			DeferCleanup(func() {

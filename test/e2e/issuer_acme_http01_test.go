@@ -173,7 +173,9 @@ var _ = Describe("ACME Issuer HTTP01 solver", Label("Platform:Generic", "Feature
 			})
 
 			By("creating hello-openshift deployment")
-			loader.CreateFromFile(testassets.ReadFile, filepath.Join("testdata", "acme", "deployment.yaml"), ns.Name)
+			loader.CreateFromFile(AssetFunc(testassets.ReadFile).WithTemplateValues(
+				AcmeHelloOpenShiftDeploymentConfig{Image: e2eHelloOpenShiftImageForNS(ns.Name)},
+			), filepath.Join("testdata", "acme", "deployment.yaml"), ns.Name)
 
 			By("creating service for hello-openshift deployment")
 			loader.CreateFromFile(testassets.ReadFile, filepath.Join("testdata", "acme", "service.yaml"), ns.Name)

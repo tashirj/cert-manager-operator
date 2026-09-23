@@ -29,7 +29,7 @@ spec:
           command:
             - /bin/sh
             - -c
-          image: fullstorydev/grpcurl:v1.9.2-alpine
+          image: {{if .Image}}{{.Image}}{{else}}fullstorydev/grpcurl:v1.9.2-alpine{{end}}
           name: grpcurl
           volumeMounts:
             - mountPath: /etc/root-secret

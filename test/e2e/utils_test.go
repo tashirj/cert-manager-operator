@@ -2308,12 +2308,11 @@ func setupVaultServer(ctx context.Context, cfg *rest.Config, loader library.Dyna
 		return "", "", "", fmt.Errorf("failed to create Vault TLS certificate: %w", err)
 	}
 
-	// Load Helm values from embedded file
-	helmValuesBytes, err := testassets.ReadFile("testdata/vault/helm-values.yaml")
+	// Load Helm values from embedded file (templated with repository and tag)
+	helmValues, err := loadVaultHelmValues(namespace)
 	if err != nil {
-		return "", "", "", fmt.Errorf("failed to read Vault Helm values: %w", err)
+		return "", "", "", fmt.Errorf("failed to load Vault Helm values: %w", err)
 	}
-	helmValues := string(helmValuesBytes)
 
 	// Create ConfigMap with Helm values
 	helmConfigMap := &corev1.ConfigMap{

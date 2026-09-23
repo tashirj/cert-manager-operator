@@ -162,6 +162,7 @@ var _ = Describe("Istio-CSR", Ordered, Label("Platform:Generic", "Feature:IstioC
 				IstioCSRGRPCurlJobConfig{
 					CertificateSigningRequest: csr,
 					IstioCSRStatus:            istioCSRStatus,
+					Image:                     e2eGrpcurlImageForNS(ns.Name),
 				},
 			), filepath.Join("testdata", "istio", "grpcurl_job.yaml"), ns.Name)
 			DeferCleanup(func() {
@@ -238,6 +239,7 @@ var _ = Describe("Istio-CSR", Ordered, Label("Platform:Generic", "Feature:IstioC
 					IstioCSRStatus:            istioCSRStatus,
 					ClusterID:                 clusterName, // matches the IstioCSR resource
 					JobName:                   grpcAppName,
+					Image:                     e2eGrpcurlImageForNS(ns.Name),
 				},
 			), filepath.Join("testdata", "istio", "grpcurl_job_with_cluster_id.yaml"), ns.Name)
 			DeferCleanup(func() {
@@ -307,6 +309,7 @@ var _ = Describe("Istio-CSR", Ordered, Label("Platform:Generic", "Feature:IstioC
 					IstioCSRStatus:            istioCSRStatus,
 					ClusterID:                 "wrong-cluster-id", // doesn't match the IstioCSR resource
 					JobName:                   grpcAppName,
+					Image:                     e2eGrpcurlImageForNS(ns.Name),
 				},
 			), filepath.Join("testdata", "istio", "grpcurl_job_with_cluster_id.yaml"), ns.Name)
 			DeferCleanup(func() {

@@ -20,6 +20,6 @@ spec:
       serviceAccountName: sleep
       containers:
       - name: sleep
-        image: curlimages/curl:8.5.0
+        image: {{if .Image}}{{.Image}}{{else}}curlimages/curl:8.5.0{{end}}
         command: ["/bin/sleep", "infinity"]
         imagePullPolicy: IfNotPresent
